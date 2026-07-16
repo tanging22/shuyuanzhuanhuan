@@ -1,0 +1,75 @@
+{
+  "bookSourceGroup": "AI,18加",
+  "bookSourceName": "搬山人小说网",
+  "bookSourceType": 0,
+  "bookSourceUrl": "https://www.banshanren.com",
+  "bookUrlPattern": "https://www.banshanren.com/novel/.*",
+  "enabled": true,
+  "enabledCookieJar": true,
+  "enabledExplore": true,
+  "header": {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+  },
+
+  "exploreUrl": [
+    {
+      "title": "奇幻玄幻",
+      "url": "/all/0-4-0-0-0-0-1-{{page}}/"
+    },
+    {
+      "title": "武侠仙侠",
+      "url": "/all/0-5-0-0-0-0-1-{{page}}/"
+    },
+    {
+      "title": "都市言情",
+      "url": "/all/0-6-0-0-0-0-1-{{page}}/"
+    },
+    {
+      "title": "最近更新",
+      "url": "/all/0-0-0-0-0-1-1-{{page}}/"
+    }
+  ],
+
+  "ruleBookInfo": {
+    "name": "h1@text",
+    "author": "[name=\"description\"]@content<js>var m=String(result).match(/》是(.*?)创作/);result=m?m[1]:'';</js>",
+    "coverUrl": "[property=\"og:image\"]@content",
+    "intro": "[property=\"og:description\"]@content",
+    "kind": ".novel_tag_list a@title&&.category_list a@text##\\#",
+    "lastChapter": ".catalog_top_box .hl@text"
+  },
+
+  "ruleSearch": {
+    "bookList": "ul[class=\"novel_list\"] .novel_li",
+    "name": ".title@text##🔞",
+    "author": ".info_box.1@text## ·.*",
+    "bookUrl": ".title@href",
+    "coverUrl": "img@data-src",
+    "intro": ".novel_intro_box p@text",
+    "kind": ".category_list a@text",
+    "wordCount": ".info_box.1@text##.*· "
+  },
+
+  "ruleExplore": {
+    "bookList": "ul[class=\"novel_list\"] .novel_li",
+    "name": ".title@text",
+    "author": ".info_box.1@text## ·.*",
+    "bookUrl": ".title@href",
+    "coverUrl": "img@data-src",
+    "kind": ".category_list a@text",
+    "wordCount": ".info_box.1@text##.*· "
+  },
+
+  "searchUrl": "https://www.banshanren.com/search/index?keyword={{key}}&page={{page}}",
+
+  "ruleToc": {
+    "chapterList": "li[class~=volume_chapter] a&&ul[class~=chapter_list] a",
+    "chapterName": "text",
+    "chapterUrl": "href"
+  },
+
+  "ruleContent": {
+    "content": ".chapter_content_box p@html##\\<span.*\\>\\d+\\<\\/span\\>",
+    "nextContentUrl": "text.下一章@href"
+  }
+}
