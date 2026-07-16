@@ -1,98 +1,108 @@
 [
   {
-    "bookSourceGroup": "AI,18加",
-    "bookSourceName": "搬山人小说网",
-    "bookSourceType": 0,
-    "bookSourceUrl": "https://www.banshanren.com",
-    "bookUrlPattern": "https://www.banshanren.com/novel/.*",
-    "enabled": true,
-    "enabledCookieJar": true,
-    "enabledExplore": true,
+    "homeUrl": "https://www.banshanren.com",
+    "name": "搬山人小说网",
+    "enable": true,
 
-    "header": {
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    "httpConfigs": {
+      "headers": {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+      },
+      "useCookies": true
     },
 
-    "exploreUrl": [
-      {
-        "title": "奇幻玄幻",
-        "url": "/all/0-4-0-0-0-0-1-{{page}}/"
-      },
-      {
-        "title": "武侠仙侠",
-        "url": "/all/0-5-0-0-0-0-1-{{page}}/"
-      },
-      {
-        "title": "都市言情",
-        "url": "/all/0-6-0-0-0-0-1-{{page}}/"
-      },
-      {
-        "title": "历史军事",
-        "url": "/all/0-7-0-0-0-0-1-{{page}}/"
-      },
-      {
-        "title": "游戏竞技",
-        "url": "/all/0-8-0-0-0-0-1-{{page}}/"
-      },
-      {
-        "title": "科幻未来",
-        "url": "/all/0-9-0-0-0-0-1-{{page}}/"
-      },
-      {
-        "title": "悬疑灵异",
-        "url": "/all/0-10-0-0-0-0-1-{{page}}/"
-      },
-      {
-        "title": "最近更新",
-        "url": "/all/0-0-0-0-0-1-1-{{page}}/"
-      },
-      {
-        "title": "最新上架",
-        "url": "/all/0-0-0-0-0-2-1-{{page}}/"
+    "bookDetail": {
+      "forGetMethod": true,
+      "parser": {
+        "bookName": "h1@text",
+        "author": "[name=\"description\"]@content<js>var m = String(result).match(/》是(.*?)创作/);result = m ? m[1] : '';</js>",
+        "coverUrl": "[property=\"og:image\"]@content",
+        "desc": "[property=\"og:description\"]@content",
+        "typeText": ".novel_tag_list a@title&&.category_list a@text##\\#",
+        "lastChapterTitle": ".catalog_top_box .hl@text"
       }
-    ],
-
-    "searchUrl": "https://www.banshanren.com/search/index?keyword={{key}}&page={{page}}",
-
-    "ruleBookInfo": {
-      "name": "h1@text",
-      "author": "[name=\"description\"]@content<js>var m=String(result).match(/》是(.*?)创作/);result=m?m[1]:'';</js>",
-      "coverUrl": "[property=\"og:image\"]@content",
-      "intro": "[property=\"og:description\"]@content",
-      "kind": ".novel_tag_list a@title&&.category_list a@text##\\#",
-      "lastChapter": ".catalog_top_box .hl@text"
     },
 
-    "ruleSearch": {
-      "bookList": "ul[class=\"novel_list\"] .novel_li",
-      "name": ".title@text##🔞",
-      "author": ".info_box.1@text## ·.*",
-      "bookUrl": ".title@href",
-      "coverUrl": "img@data-src",
-      "intro": ".novel_intro_box p@text",
-      "kind": ".category_list a@text",
-      "wordCount": ".info_box.1@text##.*· "
+    "searchBook": {
+      "forGetMethod": false,
+      "url": "https://www.banshanren.com/search/index?keyword=%@&page=1",
+      "params": {
+        "searchkey": "%@"
+      },
+      "parser": {
+        "_list": "ul[class=\"novel_list\"] .novel_li",
+        "bookName": ".title@text##🔞",
+        "author": ".info_box.1@text## ·.*",
+        "dirURL": ".title@href",
+        "coverUrl": "img@data-src",
+        "desc": ".novel_intro_box p@text",
+        "typeText": ".category_list a@text",
+        "wordCount": ".info_box.1@text##.*· "
+      }
     },
 
-    "ruleExplore": {
-      "bookList": "ul[class=\"novel_list\"] .novel_li",
-      "name": ".title@text",
-      "author": ".info_box.1@text## ·.*",
-      "bookUrl": ".title@href",
-      "coverUrl": "img@data-src",
-      "kind": ".category_list a@text",
-      "wordCount": ".info_box.1@text##.*· "
+    "bookWorld": {
+      "分类": {
+        "forGetMethod": true,
+        "urls": [
+          {
+            "name": "奇幻玄幻",
+            "url": "/all/0-4-0-0-0-0-1-{{page}}"
+          },
+          {
+            "name": "武侠仙侠",
+            "url": "/all/0-5-0-0-0-0-1-{{page}}"
+          },
+          {
+            "name": "都市言情",
+            "url": "/all/0-6-0-0-0-0-1-{{page}}"
+          },
+          {
+            "name": "历史军事",
+            "url": "/all/0-7-0-0-0-0-1-{{page}}"
+          },
+          {
+            "name": "游戏竞技",
+            "url": "/all/0-8-0-0-0-0-1-{{page}}"
+          },
+          {
+            "name": "科幻未来",
+            "url": "/all/0-9-0-0-0-0-1-{{page}}"
+          },
+          {
+            "name": "悬疑灵异",
+            "url": "/all/0-10-0-0-0-0-1-{{page}}"
+          }
+        ],
+
+        "parser": {
+          "_list": "ul[class=\"novel_list\"] .novel_li",
+          "bookName": ".title@text",
+          "author": ".info_box.1@text## ·.*",
+          "dirURL": ".title@href",
+          "coverUrl": "img@data-src",
+          "typeText": ".category_list a@text",
+          "wordCount": ".info_box.1@text##.*· "
+        }
+      }
     },
 
-    "ruleToc": {
-      "chapterList": "li[class~=volume_chapter] a&&ul[class~=chapter_list] a",
-      "chapterName": "text",
-      "chapterUrl": "href"
+    "sourceDetail": {
+      "forGetMethod": true,
+      "parser": {
+        "_list": "li[class~=volume_chapter] a&&ul[class~=chapter_list] a",
+        "title": "text",
+        "url": "href"
+      }
     },
 
-    "ruleContent": {
-      "content": ".chapter_content_box p@html##\\<span.*\\>\\d+\\<\\/span\\>",
-      "nextContentUrl": "text.下一章@href"
-    }
+    "chapterDetail": {
+      "forGetMethod": true,
+      "parser": {
+        "content": ".chapter_content_box p@html##\\<span.*\\>\\d+\\<\\/span\\>"
+      }
+    },
+
+    "responseType": 0
   }
 ]
