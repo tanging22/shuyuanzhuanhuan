@@ -1,108 +1,30 @@
-[
-  {
-    "homeUrl": "https://www.banshanren.com",
-    "name": "搬山人小说网",
-    "enable": true,
+{
+"bookSourceName":"搬山人小说网",
+"bookSourceUrl":"https://www.banshanren.com",
 
-    "httpConfigs": {
-      "headers": {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-      },
-      "useCookies": true
-    },
+"searchUrl":"https://www.banshanren.com/search/index?keyword={{key}}",
 
-    "bookDetail": {
-      "forGetMethod": true,
-      "parser": {
-        "bookName": "h1@text",
-        "author": "[name=\"description\"]@content<js>var m = String(result).match(/》是(.*?)创作/);result = m ? m[1] : '';</js>",
-        "coverUrl": "[property=\"og:image\"]@content",
-        "desc": "[property=\"og:description\"]@content",
-        "typeText": ".novel_tag_list a@title&&.category_list a@text##\\#",
-        "lastChapterTitle": ".catalog_top_box .hl@text"
-      }
-    },
+"ruleSearch":{
+"bookList":".novel_li",
+"name":".title@text",
+"author":".info_box@text",
+"bookUrl":"a@href",
+"coverUrl":"img@data-src"
+},
 
-    "searchBook": {
-      "forGetMethod": false,
-      "url": "https://www.banshanren.com/search/index?keyword=%@&page=1",
-      "params": {
-        "searchkey": "%@"
-      },
-      "parser": {
-        "_list": "ul[class=\"novel_list\"] .novel_li",
-        "bookName": ".title@text##🔞",
-        "author": ".info_box.1@text## ·.*",
-        "dirURL": ".title@href",
-        "coverUrl": "img@data-src",
-        "desc": ".novel_intro_box p@text",
-        "typeText": ".category_list a@text",
-        "wordCount": ".info_box.1@text##.*· "
-      }
-    },
+"ruleBookInfo":{
+"name":"h1@text",
+"author":".novel_title_box .hl@text",
+"intro":".novel_intro_box p@text"
+},
 
-    "bookWorld": {
-      "分类": {
-        "forGetMethod": true,
-        "urls": [
-          {
-            "name": "奇幻玄幻",
-            "url": "/all/0-4-0-0-0-0-1-{{page}}"
-          },
-          {
-            "name": "武侠仙侠",
-            "url": "/all/0-5-0-0-0-0-1-{{page}}"
-          },
-          {
-            "name": "都市言情",
-            "url": "/all/0-6-0-0-0-0-1-{{page}}"
-          },
-          {
-            "name": "历史军事",
-            "url": "/all/0-7-0-0-0-0-1-{{page}}"
-          },
-          {
-            "name": "游戏竞技",
-            "url": "/all/0-8-0-0-0-0-1-{{page}}"
-          },
-          {
-            "name": "科幻未来",
-            "url": "/all/0-9-0-0-0-0-1-{{page}}"
-          },
-          {
-            "name": "悬疑灵异",
-            "url": "/all/0-10-0-0-0-0-1-{{page}}"
-          }
-        ],
+"ruleToc":{
+"chapterList":".chapter_list li",
+"chapterName":"a@text",
+"chapterUrl":"a@href"
+},
 
-        "parser": {
-          "_list": "ul[class=\"novel_list\"] .novel_li",
-          "bookName": ".title@text",
-          "author": ".info_box.1@text## ·.*",
-          "dirURL": ".title@href",
-          "coverUrl": "img@data-src",
-          "typeText": ".category_list a@text",
-          "wordCount": ".info_box.1@text##.*· "
-        }
-      }
-    },
-
-    "sourceDetail": {
-      "forGetMethod": true,
-      "parser": {
-        "_list": "li[class~=volume_chapter] a&&ul[class~=chapter_list] a",
-        "title": "text",
-        "url": "href"
-      }
-    },
-
-    "chapterDetail": {
-      "forGetMethod": true,
-      "parser": {
-        "content": ".chapter_content_box p@html##\\<span.*\\>\\d+\\<\\/span\\>"
-      }
-    },
-
-    "responseType": 0
-  }
-]
+"ruleContent":{
+"content":".chapter_content_box p@text"
+}
+}
